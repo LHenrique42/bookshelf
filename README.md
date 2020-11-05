@@ -29,7 +29,7 @@ Frontend:
 | Java | 11 |
 | Maven | Apache Maven 3.6.3 |
 
-### Execução dos containers:
+### Execução dos containers utilizando composer (Fix):
    
 1) Utilizando o composer (Fix):
 ```
@@ -37,7 +37,8 @@ $ docker-compose -f docker-compose.yml up -d
 ```
 Abra no navegador o endereço http://localhost:8000 para ver a aplicação
 
-2) Buildando e executando individualmente:
+### Execução dos containers individualmente
+2) Buildando e executando:
 
 2.1) Backend
 ### Build
