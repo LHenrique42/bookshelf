@@ -9,8 +9,17 @@ import { environment } from '@env/environment';
 })
 export class AboutComponent implements OnInit {
   version: string | null = environment.version;
+  title = 'Bookshelf';
+  gridColumns = 3;
+  defaultElevation = 2;
+  raisedElevation = 8;
 
   constructor() {}
 
+  toggleGridColumns() {
+    this.gridColumns = this.gridColumns === 3 ? 4 : 3;
+  }
+
   ngOnInit() {}
+
 }

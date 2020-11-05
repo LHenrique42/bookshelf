@@ -8,7 +8,10 @@
   margin: 0 auto;
 }
 
-q {
-  font-style: italic;
-  quotes: "« " " »";
+.mat-stepper-vertical {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
 }
