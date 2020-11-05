@@ -44,7 +44,7 @@ public class AuthorController {
 
     @ApiOperation(value = "Lista autores")
     @RequestMapping(value = "", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<List<Author>> listAuthors() {
+    public ResponseEntity<List<Author>> getAll() {
         return ResponseEntity.ok(authorRepository.findAll());
     }
 
@@ -53,7 +53,7 @@ public class AuthorController {
     @ApiResponse(code = 404, message = "Author not found."),
     @ApiResponse(code = 500, message = "The server failed to fulfill an apparently valid request.") })
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Author> findBook(@PathVariable(value="id") long id) {
+    public ResponseEntity<Author> getById(@PathVariable(value="id") long id) {
         try {
             Optional<Author> optionalAuthor = authorRepository.findById(id);
             if (!optionalAuthor.isPresent()) {
@@ -73,7 +73,7 @@ public class AuthorController {
     @ApiResponse(code = 403, message = "The server understood the request, but it is refusing to fulfill it."),
     @ApiResponse(code = 500, message = "The server failed to fulfill an apparently valid request.") })
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ResponseEntity<Author> saveAuthor(@Valid @RequestBody Author authorRequest) {
+    public ResponseEntity<Author> create(@Valid @RequestBody Author authorRequest) {
         logger.info("Registering author: {}", authorRequest.toString());
         try {
             Author author = authorRepository.save(authorRequest);
@@ -91,7 +91,7 @@ public class AuthorController {
     @ApiResponse(code = 404, message = "Author not found."),
     @ApiResponse(code = 500, message = "The server failed to fulfill an apparently valid request.") })
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Author> deleteAuthor(@PathVariable(value="id") long id) {
+    public ResponseEntity<Author> delete(@PathVariable(value="id") long id) {
         try {
             Optional<Author> optionalAuthor = authorRepository.findById(id);
             if (!optionalAuthor.isPresent()) {
@@ -119,7 +119,7 @@ public class AuthorController {
     @ApiResponse(code = 403, message = "The server understood the request, but it is refusing to fulfill it."),
     @ApiResponse(code = 500, message = "The server failed to fulfill an apparently valid request.") })
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Author> updateAuthor(@PathVariable(value="id") long id, 
+    public ResponseEntity<Author> update(@PathVariable(value="id") long id, 
         @Valid @RequestBody Author authorRequest) {
 
         try {

@@ -47,7 +47,7 @@ public class CategoryController {
     @ApiResponse(code = 404, message = "Category not found."),
     @ApiResponse(code = 500, message = "The server failed to fulfill an apparently valid request.") })
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<Category>> listCategorys() {
+    public ResponseEntity<List<Category>> getAll() {
         return ResponseEntity.ok(categoryRepository.findAll());
     }
 
@@ -57,7 +57,7 @@ public class CategoryController {
     @ApiResponse(code = 403, message = "The server understood the request, but it is refusing to fulfill it."),
     @ApiResponse(code = 500, message = "The server failed to fulfill an apparently valid request.") })
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Category> findBook(@PathVariable(value="id") long id) {
+    public ResponseEntity<Category> getById(@PathVariable(value="id") long id) {
         try {
             Optional<Category> optionalCategory = categoryRepository.findById(id);
             if (!optionalCategory.isPresent()) {
@@ -76,7 +76,7 @@ public class CategoryController {
     @ApiResponse(code = 404, message = "Category not found."),
     @ApiResponse(code = 500, message = "The server failed to fulfill an apparently valid request.") })
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ResponseEntity<Category> saveCategory(@Valid @RequestBody Category categoryRequest) {
+    public ResponseEntity<Category> create(@Valid @RequestBody Category categoryRequest) {
         logger.info("Registering category: {}", categoryRequest.toString());
         try {
             Category category = categoryRepository.save(categoryRequest);
@@ -95,7 +95,7 @@ public class CategoryController {
     @ApiResponse(code = 403, message = "The server understood the request, but it is refusing to fulfill it."),
     @ApiResponse(code = 500, message = "The server failed to fulfill an apparently valid request.") })
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Category> deleteCategory(@PathVariable(value="id") long id) {
+    public ResponseEntity<Category> delete(@PathVariable(value="id") long id) {
         try {
             Optional<Category> optionalCategory = categoryRepository.findById(id);
             if (!optionalCategory.isPresent()) {
@@ -118,7 +118,7 @@ public class CategoryController {
 
     @ApiOperation(value = "Atualiza um autor")
     @RequestMapping(value = "", method = RequestMethod.PUT)
-    public ResponseEntity<Category> updateCategory(@PathVariable(value="id") long id, 
+    public ResponseEntity<Category> update(@PathVariable(value="id") long id, 
         @Valid @RequestBody Category categoryRequest) {
 
         try {
