@@ -9,14 +9,15 @@ Frontend:
 - NodeJS 12.18.3
 - Typescript 4
 - Angular 10
-- ngx-rocket
+- ngx-rocket para criar o app inicial
 
-###OBS:
+### OBS:
 - Há uma pasta docs com as requisições (Postman)
 - Crie as entidades na seguinte ordem: 
     (1-2) Autor e Categoria 
     (3) Livro (Livro depende de Autor e Categoria)
 - A interface (Listagem) só pode ser testada criando as entidades no Postman, o modelo de cadastro foi iniciado mas não concluido.
+- docker-compose e Dockerfile do frontend estão com erros
 
 ### Requisitos para executar:
 
@@ -30,7 +31,7 @@ Frontend:
 
 ### Execução dos containers:
    
-1) Utilizando o composer:
+1) Utilizando o composer (Fix):
 ```
 $ docker-compose -f docker-compose.yml up -d
 ```
@@ -39,6 +40,17 @@ Abra no navegador o endereço http://localhost:8000 para ver a aplicação
 2) Buildando e executando individualmente:
 
 2.1) Backend
+### Build
+```
+$ docker build -t -f backend/Dockerfile bookshelf-backend .
+```
+
+### Executar
+```
+$ docker run -p 8080:8080 bookshelf-backend
+```
+
+2.2) Frontend (FIX)
 ### Build
 ```
 $ docker build -t -f backend/Dockerfile bookshelf-backend .
