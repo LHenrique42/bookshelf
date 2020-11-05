@@ -5,18 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
-@Table(name="TB_CATEGORY")
 public class Category {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @ApiModelProperty(hidden=true)
     private long id;
 
     @NotNull
@@ -24,6 +21,10 @@ public class Category {
     private String name;
 
     public Category() {}
+
+    public Category(String name) {
+        this.name = name;
+    }
 
     public long getId() {
         return id;

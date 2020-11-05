@@ -1,4 +1,4 @@
-package com.henrique.bookshelf.controller;
+package com.henrique.bookshelf;
 
 import java.time.LocalDate;
 
@@ -28,38 +28,16 @@ public class AuthorControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+
     @Test
-    void registryAuthor() throws Exception {
+    void authorTest() throws Exception {
         String name = "Luis Henrique";
         LocalDate birthdayDate = LocalDate.parse("1997-09-01");
 
         Author author = new Author(name, birthdayDate);
 
         try {
-            mockMvc.perform(post("/api/author")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(author)))
-                .andExpect(status().isCreated());
-
-            assertAll("Author Registry",
-                    () -> assertEquals(name, author.getName()),
-                    () -> assertEquals(birthdayDate, author.getDateOfBirthday()),
-                    () -> assertNotNull(author.getId()));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    void findAuthor() throws Exception {
-        String name = "Luis Henrique";
-        LocalDate birthdayDate = LocalDate.parse("1997-09-01");
-
-        Author author = new Author(name, birthdayDate);
-
-        try {
-            mockMvc.perform(post("/api/author")
+            mockMvc.perform(post("/api/v1/author")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(author)))
                 .andDo(print())
@@ -70,10 +48,21 @@ public class AuthorControllerTest {
                     () -> assertEquals(birthdayDate, author.getDateOfBirthday()),
                     () -> assertNotNull(author.getId()));
 
-            mockMvc.perform(get("/api/author/" + author.getId()))
+            mockMvc.perform(get("/api/v1/author/1"))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().json("{\"name\":\"xxx\",\"dateOfBirthday\":\"xxx\", \"Book\":\"xxx\"}"));
+                .andExpect(status().isOk());
+
+            mockMvc.perform(get("/api/v1/author"))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+            mockMvc.perform(get("/api/v1/author"))
+                .andDo(print())
+                .andExpect(status().isOk());
+            
+            mockMvc.perform(delete("/api/v1/author/" + 1))
+                .andDo(print())
+                .andExpect(status().isNoContent());
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -8,9 +8,9 @@ import { MaterialModule } from './material.module';
 
 import { CoreModule } from '@core';
 import { SharedModule } from '@shared';
-import { HomeModule } from './home/home.module';
+import { BookRegisterModule } from './BookRegister/book-register.module';
 import { ShellModule } from './shell/shell.module';
-import { AboutModule } from './about/about.module';
+import { BookListModule } from './BookList/book-list.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -25,8 +25,8 @@ import { AppRoutingModule } from './app-routing.module';
     CoreModule,
     SharedModule,
     ShellModule,
-    HomeModule,
-    AboutModule,
+    BookRegisterModule,
+    BookListModule,
     AppRoutingModule, // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],

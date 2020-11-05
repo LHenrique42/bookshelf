@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController()
-@RequestMapping(value="/api/category")
+@RequestMapping(value="/api/v1/category")
 @Api(value="API REST Bookshelf")
 @CrossOrigin(origins = "*")
 public class CategoryController {
@@ -116,12 +116,18 @@ public class CategoryController {
         categoryRepository.delete(category);
     }
 
-    @ApiOperation(value = "Atualiza um autor")
-    @RequestMapping(value = "", method = RequestMethod.PUT)
+    @ApiOperation(value = "Atualiza uma categoria")
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Category> update(@PathVariable(value="id") long id, 
         @Valid @RequestBody Category categoryRequest) {
 
         try {
+            Optional<Category> optionalAuthor = categoryRepository.findById(id);
+            if (!optionalAuthor.isPresent()) {
+                logger.warn("Category not found: {}", categoryRequest.toString());
+                return ResponseEntity.notFound().build();
+            }
+            categoryRequest.setId(id);
             categoryRepository.save(categoryRequest);
             return ResponseEntity.noContent().build();
         } catch(Exception e) {

@@ -17,7 +17,6 @@ import com.henrique.bookshelf.repository.BookRepository;
 import com.henrique.bookshelf.repository.CategoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +32,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController()
-@RequestMapping(value="/api/book")
+@RequestMapping(value="/api/v1/book")
 @Api(value="API REST Bookshelf")
 @CrossOrigin(origins = "*")
 public class BookController {
@@ -69,14 +68,14 @@ public class BookController {
         try {
             Optional<Book> optionalBook = bookRepository.findById(id);
             if (!optionalBook.isPresent()) {
-                logger.warn("Book not find: id: {}", id);
+                logger.warn("Book not found: id: {}", id);
                 return ResponseEntity.notFound().build();
             }
             return ResponseEntity.ok(optionalBook.get());
         } catch(Exception e) {
             e.printStackTrace();
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        return ResponseEntity.unprocessableEntity().build();
     }
 
     @ApiOperation(value = "Cadastra novo livro")
@@ -93,7 +92,7 @@ public class BookController {
             Optional<Author> optionalAuthor = authorRepository
                 .findById(author.getId());
             if (!optionalAuthor.isPresent()) {
-                logger.warn("Author not find: {}", author.toString());
+                logger.warn("Author not found: {}", author.toString());
                 return ResponseEntity.badRequest().build();
             }
     
@@ -101,7 +100,7 @@ public class BookController {
             Optional<Category> optionalCategory = categoryRepository
                 .findByName(category.getName());
             if (!optionalCategory.isPresent()) {
-                logger.warn("Category not find: id: {}", category.toString());
+                logger.warn("Category not found: {}", category.toString());
                 return ResponseEntity.badRequest().build();
             }
     
@@ -116,7 +115,7 @@ public class BookController {
         } catch(Exception e) {
             e.printStackTrace();
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        return ResponseEntity.unprocessableEntity().build();
     }
 
     @ApiOperation(value = "Deleta um livro")
@@ -129,7 +128,7 @@ public class BookController {
         try {
             Optional<Book> optionalBook = bookRepository.findById(id);
             if (!optionalBook.isPresent()) {
-                logger.warn("Book not find: {}", optionalBook.toString());
+                logger.warn("Book not found: {}", optionalBook.toString());
                 return ResponseEntity.notFound().build();
             }
             bookRepository.deleteById(id);
@@ -154,14 +153,14 @@ public class BookController {
             Optional<Author> optionalAuthor = authorRepository
                 .findById(author.getId());
             if (!optionalAuthor.isPresent()) {
-                logger.warn("Author not find: {}", author.toString());
+                logger.warn("Author not found: {}", author.toString());
                 return ResponseEntity.badRequest().build();
             }
     
             Optional<Book> optionalBook = bookRepository
                 .findById(bookRequest.getId());
             if (!optionalBook.isPresent()) {
-                logger.warn("Book not find: {}", bookRequest.toString());
+                logger.warn("Book not found: {}", bookRequest.toString());
                 return ResponseEntity.badRequest().build();
             }
     
@@ -169,7 +168,7 @@ public class BookController {
             Optional<Category> optionalCategory = categoryRepository
                 .findByName(category.getName());
             if (!optionalCategory.isPresent()) {
-                logger.warn("Category not find: id: {}", category.toString());
+                logger.warn("Category not found: {}", category.toString());
                 return ResponseEntity.badRequest().build();
             }
     

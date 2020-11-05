@@ -4,14 +4,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from '@app/material.module';
-import { AboutRoutingModule } from './about-routing.module';
-import { AboutComponent } from './about.component';
+import { BookListRoutingModule } from './book-list-routing.module';
+import { BookListComponent } from './book-list.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatCardModule } from "@angular/material/card";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
-import { MaterialElevationDirective } from './about-elevation.directive';
+import { MaterialElevationDirective } from './book-list-elevation.directive';
 @NgModule({
   imports: [
     BrowserModule,
@@ -20,7 +20,7 @@ import { MaterialElevationDirective } from './about-elevation.directive';
     MatToolbarModule,
     MatButtonModule,
     FlexLayoutModule,
-    CommonModule, TranslateModule, FlexLayoutModule, MaterialModule, AboutRoutingModule],
-  declarations: [AboutComponent, MaterialElevationDirective],
+    CommonModule, TranslateModule, FlexLayoutModule, MaterialModule, BookListRoutingModule],
+  declarations: [BookListComponent, MaterialElevationDirective],
 })
-export class AboutModule {}
+export class BookListModule {}

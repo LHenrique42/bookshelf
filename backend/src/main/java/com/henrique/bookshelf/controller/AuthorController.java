@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController()
-@RequestMapping(value="/api/author")
+@RequestMapping(value="/api/v1/author")
 @Api(value="API REST Bookshelf - Author Controller")
 @CrossOrigin(origins = "*")
 public class AuthorController {
@@ -95,7 +95,7 @@ public class AuthorController {
         try {
             Optional<Author> optionalAuthor = authorRepository.findById(id);
             if (!optionalAuthor.isPresent()) {
-                logger.warn("Author not find: id: {}", id);
+                logger.warn("Author not found: id: {}", id);
                 return ResponseEntity.notFound().build();
             }
             deleteAuthorInTransaction(optionalAuthor.get());
@@ -113,7 +113,7 @@ public class AuthorController {
         authorRepository.delete(author);
     }
 
-    @ApiOperation(value = "Atualiza um autor")
+    @ApiOperation(value = "Atualiza autor")
     @ApiResponses(value = { @ApiResponse(code = 204, message = "The request has succeeded."),
     @ApiResponse(code = 400, message = "Invalid parameters."),
     @ApiResponse(code = 403, message = "The server understood the request, but it is refusing to fulfill it."),

@@ -1,0 +1,70 @@
+<div class="book-form-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Cadastro de livro</mat-card-title>
+    </mat-card-header>
+
+    <form class="book-register-form" [formGroup]="bookRegister" (ngSubmit)="onSubmit()">
+
+      <mat-card-content>
+        <mat-form-field class="book-register-full-width">
+          <input matInput formControlName="authorName" placeholder="Nome do autor">
+        </mat-form-field>
+
+        <mat-form-field class="book-register-full-width">
+          <input matInput formControlName="authorBirthdayDate" placeholder="Data de nascimento do autor (00-00-0000)">
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <mat-card-content>
+        <mat-form-field class="book-register-full-width">
+          <mat-label>Escolha uma categoria...</mat-label>
+          <mat-select formControlName="category">
+            <mat-option [value]="categories" *ngFor="let categories of Categories">{{categories}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <mat-card-content>
+        <mat-form-field class="book-register-full-width">
+          <input matInput formControlName="bookName" placeholder="Nome do livro">
+        </mat-form-field>
+
+        <mat-form-field class="book-register-full-width">
+          <input matInput formControlName="isbn" placeholder="ISBN">
+        </mat-form-field>
+
+        <mat-form-field class="book-register-full-width">
+          <input matInput formControlName="publisher" placeholder="Editora">
+        </mat-form-field>
+
+        <mat-form-field class="book-register-full-width">
+          <input matInput formControlName="bookDateOfPublication" placeholder="Data de publicação (00-00-0000)">
+        </mat-form-field>
+
+        <mat-form-field class="book-register-full-width">
+          <input matInput formControlName="numberOfPages" placeholder="Número de páginas">
+        </mat-form-field>
+
+        <mat-form-field class="book-register-full-width">
+          <input matInput formControlName="coverImageUrl" placeholder="URL da Imagem de Capa">
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <mat-card-content>
+        <mat-label>Descrição</mat-label>
+        <mat-form-field class="book-register-full-width">
+          <input formControlName="description" matInput #message maxlength="256" placeholder="Descrição">
+          <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+        </mat-form-field>
+      </mat-card-content>
+
+      <button mat-stroked-button color="accent" [disabled]="!bookRegister.valid" class="btn-block">Cadastrar</button>
+
+    </form>
+  </mat-card>
+</div>

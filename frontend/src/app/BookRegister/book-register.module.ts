@@ -6,15 +6,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MaterialModule } from '@app/material.module';
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './home.component';
+import { BookRegisterRoutingModule } from './book-register-routing.module';
+import { BookRegisterComponent } from './book-register.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule, TranslateModule, FlexLayoutModule, MaterialModule, HomeRoutingModule],
-  declarations: [HomeComponent],
+    ReactiveFormsModule,
+    CommonModule, TranslateModule, FlexLayoutModule, MaterialModule, BookRegisterRoutingModule],
+  declarations: [BookRegisterComponent],
 })
-export class HomeModule {}
+export class BookRegisterModule {}

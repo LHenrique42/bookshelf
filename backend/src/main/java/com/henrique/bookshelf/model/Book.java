@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -18,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
-@Table(name="TB_BOOK")
 public class Book {
     
     @Id
@@ -55,6 +53,21 @@ public class Book {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
+
+    public Book(long id, @NotNull String title, @NotNull Author author, @NotNull String isbn, String coverImg,
+    String publisher, LocalDate dateOfPublication, @NotNull String description, @NotNull Integer numberOfPages,
+    @NotNull Category category) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.coverImg = coverImg;
+        this.publisher = publisher;
+        this.dateOfPublication = dateOfPublication;
+        this.description = description;
+        this.numberOfPages = numberOfPages;
+        this.category = category;
+    }
 
     public long getId() {
         return id;

@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: bookshelf-frontend
+    ports:
+      - '9000:8000'
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: bookshelf-backend
+    ports:
+      - '8080:8080'

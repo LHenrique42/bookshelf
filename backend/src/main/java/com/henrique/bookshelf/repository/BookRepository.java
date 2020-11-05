@@ -16,13 +16,13 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "delete from Book b where b.author.id=:#{#authorId}", nativeQuery = true)
+    @Query(value = "delete from Book b where b.author_Id=:#{#authorId}", nativeQuery = true)
     void deleteByAuthorId(@Param("authorId")long authorId);
 
     List<Book> findByCategoryId(long category);
 
     @Modifying
     @Transactional
-    @Query(value = "delete from Book b where b.category.id=:#{#categoryId}", nativeQuery = true)
+    @Query(value = "delete from Book b where b.category_Id=:#{#categoryId}", nativeQuery = true)
     void deleteByCategoryId(@Param("categoryId")long categoryId);
 }
